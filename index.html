@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheat Detect</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body { 
+            background-color: #34333b; /* similar dark gray */
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-start text-center pt-10 relative">
+
+    <!-- Hamburger menu -->
+    <div id="menuBtn" class="absolute top-5 right-5">
+        <div class="space-y-1 cursor-pointer">
+            <div class="w-8 h-1 bg-white"></div>
+            <div class="w-8 h-1 bg-white"></div>
+            <div class="w-8 h-1 bg-white"></div>
+        </div>
+    </div>
+
+    <!-- Hidden slide menu -->
+    <div id="sideMenu" class="hidden fixed top-0 right-0 bg-gray-800 text-white p-4 shadow-xl">
+        <a href="#" class="flex items-center py-2 gap-2 text-[#5993f4]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">Start New Detection</span>
+        </a>
+        <a href="#" class="flex items-center py-2 gap-2 text-[#5993f4]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">View Last Detection</span>
+        </a>
+        <a href="#" class="flex items-center py-2 gap-2 text-[#5993f4]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path fill-rule="evenodd" d="M6 4.75A.75.75 0 0 1 6.75 4h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 4.75ZM6 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 10Zm0 5.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75ZM1.99 4.75a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 15.25a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 10a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1V10Z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">Previous Detections</span>
+        </a>
+        <a href="#" class="flex items-center py-2 gap-2 text-[#5993f4]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path fill-rule="evenodd" d="M8.34 1.804A1 1 0 0 1 9.32 1h1.36a1 1 0 0 1 .98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 0 1 1.262.125l.962.962a1 1 0 0 1 .125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 0 1 .804.98v1.361a1 1 0 0 1-.804.98l-1.473.295a6.95 6.95 0 0 1-.587 1.416l.834 1.25a1 1 0 0 1-.125 1.262l-.962.962a1 1 0 0 1-1.262.125l-1.25-.834a6.953 6.953 0 0 1-1.416.587l-.294 1.473a1 1 0 0 1-.98.804H9.32a1 1 0 0 1-.98-.804l-.295-1.473a6.957 6.957 0 0 1-1.416-.587l-1.25.834a1 1 0 0 1-1.262-.125l-.962-.962a1 1 0 0 1-.125-1.262l.834-1.25a6.957 6.957 0 0 1-.587-1.416l-1.473-.294A1 1 0 0 1 1 10.68V9.32a1 1 0 0 1 .804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 0 1 .125-1.262l.962-.962A1 1 0 0 1 5.38 3.03l1.25.834a6.957 6.957 0 0 1 1.416-.587l.294-1.473ZM13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">Settings and Options</span>
+        </a>
+        <a href="#" class="flex items-center py-2 gap-2 text-[#5993f4]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">About Cheat Detect</span>
+        </a>
+    </div>
+
+    <!-- logo image-->
+    <div class="mt-20">
+        <img src="logo.png" alt="Logo" class="w-32 mx-auto h-auto" />
+    </div>
+
+    <!-- icon image-->
+    <div class="mt-16 flex justify-center">
+        <div class="w-72 h-72 rounded-full border-8 flex items-center justify-center border-[#e1d301]">
+            <img src="icon.png" alt="Icon" class="w-48 h-auto" />
+        </div>
+    </div>
+
+    
+    
+
+    <script>
+        // Toggle menu open/close
+        $("#menuBtn").click(() => {
+            $("#sideMenu").toggleClass("hidden");
+        });
+
+        // Camera button action
+        $("#cameraBtn").click(() => {
+            alert("Camera button clicked!");
+            // TODO: implement actual feature later
+        });
+        // Close the slide-out menu when clicking outside of it
+        $(document).on('mousedown touchstart', function(event) {
+            const sideMenu = $('#sideMenu');
+            const isOpen = !sideMenu.hasClass('hidden');
+            if (!isOpen) return;
+            // If the click did not originate from the sideMenu or the menu button, hide the menu
+            if (!$(event.target).closest('#sideMenu').length && !$(event.target).closest('#menuBtn').length) {
+                sideMenu.addClass('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

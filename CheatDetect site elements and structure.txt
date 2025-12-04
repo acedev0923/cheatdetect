@@ -1,0 +1,31 @@
+
+Home page featuring the app.
+
+Basic info about the app typical for an app website.
+
+Mailinglist signup for promotions and special offers and updates about the app.
+
+Menu:
+- Get CheatDetect 
+- News
+- Store
+- About
+
+
+The shell site should be of a simple structure.
+
+1 CSS file for all styles
+1 images directory /images/
+
+The pages can just be .html
+
+/index.html
+/News.html
+/Store.html
+/About.html
+/images/
+
+Background color: 34333b
+yellow color: e1d301
+Here is the blue color: 5993f4
+
